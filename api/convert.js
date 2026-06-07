@@ -41,25 +41,28 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: "Missing file data" });
     }
 
-    // Step 1 — Auth (iLoveAPI new endpoint)
+    // Step 1 — Auth
+    const authBody = JSON.stringify({ public_key: PUBLIC_KEY });
     const authRes = await request(
       {
         hostname: "api.ilovepdf.com",
         path: "/v1/auth",
         method: "POST",
-        headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(JSON.stringify({ public_key: PUBLIC_KEY })) },
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(authBody),
+        },
       },
-      JSON.stringify({ public_key: PUBLIC_KEY })
+      authBody
     );
 
-    console.log("Auth response:", JSON.stringify(authRes.body));
     const token = authRes.body.token;
     if (!token) return res.status(500).json({ error: "Auth failed: " + JSON.stringify(authRes.body) });
 
-    // Step 2 — Start task
+    // Step 2 — Start task (correct tool name: pdftojpg -> officepdf for pdf to word)
     const taskRes = await request({
       hostname: "api.ilovepdf.com",
-      path: "/v1/start/pdfoffice",
+      path: "/v1/start/officepdf",
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -100,7 +103,7 @@ module.exports = async (req, res) => {
     // Step 4 — Process
     const processBody = JSON.stringify({
       task,
-      tool: "pdfoffice",
+      tool: "officepdf",
       files: [{ server_filename: serverFilename, filename: fileName }],
       outputformat: "docx",
     });
