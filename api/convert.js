@@ -1,6 +1,5 @@
 const https = require("https");
 
-// Helper: make HTTPS request
 function request(options, body) {
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
@@ -22,7 +21,6 @@ function request(options, body) {
 }
 
 module.exports = async (req, res) => {
-  // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -39,24 +37,24 @@ module.exports = async (req, res) => {
 
   try {
     const { fileBase64, fileName } = req.body;
-
     if (!fileBase64 || !fileName) {
       return res.status(400).json({ error: "Missing file data" });
     }
 
-    // Step 1 — Authenticate with ilovepdf
+    // Step 1 — Auth (iLoveAPI new endpoint)
     const authRes = await request(
       {
         hostname: "api.ilovepdf.com",
         path: "/v1/auth",
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(JSON.stringify({ public_key: PUBLIC_KEY })) },
       },
       JSON.stringify({ public_key: PUBLIC_KEY })
     );
 
+    console.log("Auth response:", JSON.stringify(authRes.body));
     const token = authRes.body.token;
-    if (!token) return res.status(500).json({ error: "Auth failed" });
+    if (!token) return res.status(500).json({ error: "Auth failed: " + JSON.stringify(authRes.body) });
 
     // Step 2 — Start task
     const taskRes = await request({
@@ -66,26 +64,19 @@ module.exports = async (req, res) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
+    console.log("Task response:", JSON.stringify(taskRes.body));
     const { server, task } = taskRes.body;
-    if (!task) return res.status(500).json({ error: "Task creation failed" });
+    if (!task) return res.status(500).json({ error: "Task failed: " + JSON.stringify(taskRes.body) });
 
-    // Step 3 — Upload file
+    // Step 3 — Upload
     const fileBuffer = Buffer.from(fileBase64, "base64");
     const boundary = "----FormBoundary" + Date.now();
     const CRLF = "\r\n";
-
-    const formParts = [
-      `--${boundary}${CRLF}`,
-      `Content-Disposition: form-data; name="task"${CRLF}${CRLF}`,
-      `${task}${CRLF}`,
-      `--${boundary}${CRLF}`,
-      `Content-Disposition: form-data; name="file"; filename="${fileName}"${CRLF}`,
-      `Content-Type: application/pdf${CRLF}${CRLF}`,
-    ];
-
-    const formEnd = `${CRLF}--${boundary}--${CRLF}`;
-    const formHeader = Buffer.from(formParts.join(""));
-    const formFooter = Buffer.from(formEnd);
+    const formHeader = Buffer.from(
+      `--${boundary}${CRLF}Content-Disposition: form-data; name="task"${CRLF}${CRLF}${task}${CRLF}` +
+      `--${boundary}${CRLF}Content-Disposition: form-data; name="file"; filename="${fileName}"${CRLF}Content-Type: application/pdf${CRLF}${CRLF}`
+    );
+    const formFooter = Buffer.from(`${CRLF}--${boundary}--${CRLF}`);
     const formBody = Buffer.concat([formHeader, fileBuffer, formFooter]);
 
     const uploadRes = await request(
@@ -102,10 +93,18 @@ module.exports = async (req, res) => {
       formBody
     );
 
+    console.log("Upload response:", JSON.stringify(uploadRes.body));
     const serverFilename = uploadRes.body.server_filename;
-    if (!serverFilename) return res.status(500).json({ error: "Upload failed" });
+    if (!serverFilename) return res.status(500).json({ error: "Upload failed: " + JSON.stringify(uploadRes.body) });
 
     // Step 4 — Process
+    const processBody = JSON.stringify({
+      task,
+      tool: "pdfoffice",
+      files: [{ server_filename: serverFilename, filename: fileName }],
+      outputformat: "docx",
+    });
+
     const processRes = await request(
       {
         hostname: server,
@@ -114,17 +113,16 @@ module.exports = async (req, res) => {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(processBody),
         },
       },
-      JSON.stringify({
-        task,
-        tool: "pdfoffice",
-        files: [{ server_filename: serverFilename, filename: fileName }],
-        outputformat: "docx",
-      })
+      processBody
     );
 
-    if (processRes.status !== 200) return res.status(500).json({ error: "Processing failed" });
+    console.log("Process response:", JSON.stringify(processRes.body));
+    if (processRes.status !== 200) {
+      return res.status(500).json({ error: "Process failed: " + JSON.stringify(processRes.body) });
+    }
 
     // Step 5 — Download
     const downloadRes = await request({
@@ -134,13 +132,14 @@ module.exports = async (req, res) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    // Return as base64
     const resultBase64 = downloadRes.raw.toString("base64");
     const outName = fileName.replace(/\.pdf$/i, ".docx");
 
     return res.status(200).json({ fileBase64: resultBase64, fileName: outName });
+
   } catch (err) {
-    console.error(err);
+    console.error("Error:", err);
     return res.status(500).json({ error: "Conversion failed: " + err.message });
   }
 };
+        
