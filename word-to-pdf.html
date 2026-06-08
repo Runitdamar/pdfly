@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Word to PDF Converter — Free Online | Pdfly</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Convert Word documents to PDF online for free. Colors, fonts and formatting fully preserved. No signup, instant download."/>
+  <meta name="keywords" content="word to pdf, docx to pdf, convert word to pdf, free word to pdf converter"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="Pdfly"/>
+  <link rel="canonical" href="https://pdfly-seven.vercel.app/word-to-pdf.html"/>
+
+  <!-- Open Graph (WhatsApp, Facebook previews) -->
+  <meta property="og:title" content="Word to PDF Converter — Free Online | Pdfly"/>
+  <meta property="og:description" content="Convert Word documents to PDF online for free. Colors, fonts and formatting fully preserved. No signup, instant download."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://pdfly-seven.vercel.app/word-to-pdf.html"/>
+  <meta property="og:site_name" content="Pdfly"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Word to PDF Converter — Free Online | Pdfly"/>
+  <meta name="twitter:description" content="Convert Word documents to PDF online for free. Colors, fonts and formatting fully preserved. No signup, instant download."/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal: #171e19; --red: #ca0013; --gray-green: #b7c6c2;
+      --bg: #f4f7f6; --bg2: #edf1f0; --card: #ffffff;
+      --text: #171e19; --muted: #6b7f7a; --border: #b7c6c2;
+      --shadow: 0 20px 50px -12px rgba(0,0,0,0.08);
+      --radius-xl: 40px; --radius-lg: 24px; --radius-md: 16px;
+      --font: 'Nunito', sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(244,247,246,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; }
+    .logo { font-size: 1.6rem; font-weight: 900; color: var(--charcoal); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+    .logo-dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; }
+    .nav-back { font-size: 0.85rem; font-weight: 700; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--charcoal); }
+    .page-wrap { max-width: 720px; margin: 0 auto; padding: 4rem 5%; }
+    .tool-header { text-align: center; margin-bottom: 2.5rem; }
+    .tool-icon-big { width: 72px; height: 72px; background: #f0fff4; border: 1px solid #b7e4c7; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.2rem; }
+    .tool-header h1 { font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .tool-header p { color: var(--muted); font-size: 0.95rem; font-weight: 500; line-height: 1.6; }
+
+    /* limit banner */
+    .limit-banner { display: none; background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: var(--radius-md); padding: 0.9rem 1.2rem; margin-bottom: 1.2rem; align-items: center; gap: 0.7rem; }
+    .limit-banner.show { display: flex; }
+    .limit-banner .l-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .limit-banner p { font-size: 0.83rem; font-weight: 700; color: #92400e; }
+    .limit-banner span { font-weight: 900; color: var(--red); }
+    .limit-blocked { display: none; background: #fff5f5; border: 1.5px solid #fca5a5; border-radius: var(--radius-md); padding: 0.9rem 1.2rem; margin-bottom: 1.2rem; align-items: center; gap: 0.7rem; }
+    .limit-blocked.show { display: flex; }
+    .limit-blocked .l-icon { font-size: 1.2rem; }
+    .limit-blocked p { font-size: 0.83rem; font-weight: 700; color: var(--red); }
+
+    .upload-card { background: var(--card); border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 2.5rem; margin-bottom: 1.2rem; }
+    .drop-zone { border: 2.5px dashed var(--gray-green); border-radius: var(--radius-lg); padding: 3rem 2rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); position: relative; }
+    .drop-zone:hover, .drop-zone.dragover { border-color: var(--red); background: #fff5f5; }
+    .drop-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .drop-icon { width: 56px; height: 56px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 1rem; }
+    .drop-zone h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .drop-zone p { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+    .file-selected { display: none; align-items: center; gap: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 1rem; }
+    .file-selected.show { display: flex; }
+    .file-icon { width: 44px; height: 44px; background: #f0fff4; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-size: 0.88rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-size { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    .file-remove { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1.1rem; padding: 0.2rem; transition: color 0.2s; flex-shrink: 0; }
+    .file-remove:hover { color: var(--red); }
+    .error-msg { display: none; background: #fff5f5; border: 1px solid #fcd0d0; border-radius: var(--radius-md); padding: 1rem 1.2rem; font-size: 0.85rem; font-weight: 600; color: var(--red); margin-top: 1rem; text-align: center; }
+    .error-msg.show { display: block; }
+    .convert-btn { width: 100%; background: var(--red); color: #fff; border: none; padding: 1rem; border-radius: var(--radius-xl); font-weight: 900; font-size: 1rem; cursor: pointer; font-family: var(--font); margin-top: 1.2rem; transition: opacity 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .convert-btn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-2px); }
+    .convert-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* progress */
+    .progress-wrap { display: none; margin-top: 1.2rem; }
+    .progress-wrap.show { display: block; }
+    .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .progress-label { font-size: 0.82rem; font-weight: 700; color: var(--muted); }
+    .progress-eta { font-size: 0.78rem; font-weight: 700; color: var(--charcoal); background: var(--bg2); border: 1px solid var(--border); border-radius: 99px; padding: 0.15rem 0.6rem; }
+    .progress-bar-bg { background: var(--bg2); border-radius: 99px; height: 10px; overflow: hidden; margin-bottom: 0.4rem; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--red), #ff4d4d); border-radius: 99px; width: 0%; transition: width 0.5s ease; }
+    .progress-pct { font-size: 0.75rem; font-weight: 800; color: var(--muted); text-align: right; }
+    .steps-row { display: flex; align-items: center; gap: 0.3rem; margin-top: 0.8rem; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; flex-shrink: 0; }
+    .step-dot.active { background: var(--red); }
+    .step-dot.done { background: #22c55e; }
+    .step-line { flex: 1; height: 2px; background: var(--border); border-radius: 99px; transition: background 0.3s; }
+    .step-line.done { background: #22c55e; }
+    .steps-labels { display: flex; justify-content: space-between; margin-top: 0.3rem; }
+    .step-lbl { font-size: 0.68rem; font-weight: 700; color: var(--muted); }
+    .step-lbl.active { color: var(--red); }
+    .step-lbl.done { color: #22c55e; }
+
+    .result-card { display: none; background: var(--card); border-radius: var(--radius-xl); border: 1px solid #b7e4c7; box-shadow: var(--shadow); padding: 2rem; text-align: center; }
+    .result-card.show { display: block; }
+    .result-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .result-card h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.3rem; }
+    .result-card p { font-size: 0.85rem; color: var(--muted); font-weight: 500; margin-bottom: 1.5rem; }
+    .download-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--charcoal); color: #fff; padding: 0.85rem 2rem; border-radius: var(--radius-xl); font-weight: 800; font-size: 0.95rem; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .download-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .convert-another { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.8rem; background: transparent; color: var(--muted); border: 1.5px solid var(--border); padding: 0.7rem 1.5rem; border-radius: var(--radius-xl); font-weight: 700; font-size: 0.88rem; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+    .convert-another:hover { border-color: var(--charcoal); color: var(--charcoal); }
+    .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; margin-top: 1.2rem; }
+    .info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; text-align: center; }
+    .info-card .i-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .info-card h4 { font-size: 0.85rem; font-weight: 800; margin-bottom: 0.2rem; }
+    .info-card p { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    .other-tools { margin-top: 3rem; }
+    .other-title { font-size: 1.1rem; font-weight: 900; margin-bottom: 1rem; }
+    .other-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.7rem; }
+    .other-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; transition: all 0.2s; box-shadow: var(--shadow); }
+    .other-card:hover { transform: translateY(-2px); border-color: var(--gray-green); }
+    .other-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; border: 1px solid var(--border); }
+    .other-card span { font-size: 0.85rem; font-weight: 800; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .upload-card { animation: fadeUp 0.5s ease both; }
+    @media (max-width: 520px) { .info-grid { grid-template-columns: 1fr; } .other-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Pdfly <span class="logo-dot"></span></a>
+  <a href="index.html" class="nav-back">← All Tools</a>
+</nav>
+<div class="page-wrap">
+  <div class="tool-header">
+    <div class="tool-icon-big">📄</div>
+    <h1>Word to PDF</h1>
+    <p>Convert your Word document into a perfect PDF.<br/>Colors, fonts and formatting fully preserved.</p>
+  </div>
+
+  <div class="limit-banner" id="limitBanner">
+    <span class="l-icon">⚠️</span>
+    <p>You have <span id="remainingCount">-</span> free conversions left today. Resets at midnight.</p>
+  </div>
+  <div class="limit-blocked" id="limitBlocked">
+    <span class="l-icon">🚫</span>
+    <p>You've used all 3 free conversions today. Come back tomorrow!</p>
+  </div>
+
+  <div class="upload-card">
+    <div class="drop-zone" id="dropZone">
+      <input type="file" accept=".docx,.doc" id="fileInput"/>
+      <div class="drop-icon">📝</div>
+      <h3>Drop your Word file here</h3>
+      <p>.docx or .doc · Max 100MB</p>
+    </div>
+    <div class="file-selected" id="fileSelected">
+      <div class="file-icon">📝</div>
+      <div class="file-info">
+        <div class="file-name" id="fileName"></div>
+        <div class="file-size" id="fileSize"></div>
+      </div>
+      <button class="file-remove" onclick="removeFile()">✕</button>
+    </div>
+    <div class="error-msg" id="errorMsg"></div>
+    <button class="convert-btn" id="convertBtn" onclick="convertFile()" disabled>Convert to PDF →</button>
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-top">
+        <span class="progress-label" id="progressLabel">Reading file...</span>
+        <span class="progress-eta" id="progressEta">Estimating...</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-pct" id="progressPct">0%</div>
+      <div class="steps-row">
+        <div class="step-dot" id="s1"></div>
+        <div class="step-line" id="l1"></div>
+        <div class="step-dot" id="s2"></div>
+        <div class="step-line" id="l2"></div>
+        <div class="step-dot" id="s3"></div>
+        <div class="step-line" id="l3"></div>
+        <div class="step-dot" id="s4"></div>
+      </div>
+      <div class="steps-labels">
+        <span class="step-lbl" id="sl1">Reading</span>
+        <span class="step-lbl" id="sl2">Uploading</span>
+        <span class="step-lbl" id="sl3">Converting</span>
+        <span class="step-lbl" id="sl4">Done</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-icon">🎉</div>
+    <h3>Conversion complete!</h3>
+    <p>Your PDF is ready — colors and formatting preserved.</p>
+    <a href="#" class="download-btn" id="downloadBtn">⬇ Download PDF</a><br/>
+    <button class="convert-another" onclick="resetTool()">↩ Convert another file</button>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="i-icon">🎨</div><h4>Full Quality</h4><p>Colors & fonts preserved</p></div>
+    <div class="info-card"><div class="i-icon">⚡</div><h4>Fast</h4><p>Ready in seconds</p></div>
+    <div class="info-card"><div class="i-icon">🆓</div><h4>Free</h4><p>3 conversions/day</p></div>
+  </div>
+
+  <div class="other-tools">
+    <div class="other-title">Other Tools</div>
+    <div class="other-grid">
+      <a href="pdf-to-word.html" class="other-card"><div class="other-icon" style="background:#fff0f0;">📝</div><span>PDF to Word</span></a>
+      <a href="compress-pdf.html" class="other-card"><div class="other-icon" style="background:#f0f4ff;">🗜️</div><span>Compress PDF</span></a>
+      <a href="merge-pdf.html" class="other-card"><div class="other-icon" style="background:#f0fff4;">🔗</div><span>Merge PDFs</span></a>
+      <a href="pdf-to-jpg.html" class="other-card"><div class="other-icon" style="background:#fdf0ff;">📸</div><span>PDF to JPG</span></a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const LIMIT_KEY = 'pdfly_word2pdf';
+  const MAX_PER_DAY = 3;
+  let selectedFile = null;
+  let startTime = null;
+
+  function getLimitData() {
+    try {
+      const d = JSON.parse(localStorage.getItem(LIMIT_KEY) || '{}');
+      const today = new Date().toDateString();
+      if (d.date !== today) return { date: today, count: 0 };
+      return d;
+    } catch { return { date: new Date().toDateString(), count: 0 }; }
+  }
+
+  function saveLimitData(d) { localStorage.setItem(LIMIT_KEY, JSON.stringify(d)); }
+  function getRemainingConversions() { return Math.max(0, MAX_PER_DAY - getLimitData().count); }
+  function incrementUsage() { const d = getLimitData(); d.count++; saveLimitData(d); }
+
+  function checkLimit() {
+    const remaining = getRemainingConversions();
+    const banner = document.getElementById('limitBanner');
+    const blocked = document.getElementById('limitBlocked');
+    const btn = document.getElementById('convertBtn');
+    if (remaining === 0) {
+      blocked.classList.add('show');
+      banner.classList.remove('show');
+      btn.disabled = true;
+      btn.textContent = '🚫 Daily limit reached';
+      return false;
+    }
+    if (remaining < MAX_PER_DAY) {
+      banner.classList.add('show');
+      document.getElementById('remainingCount').textContent = remaining;
+    }
+    return true;
+  }
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+  function handleFile(file) {
+    const valid = file.name.endsWith('.docx') || file.name.endsWith('.doc');
+    if (!valid) return showError('Please upload a .docx or .doc file.');
+    if (file.size > 100 * 1024 * 1024) return showError('File too large. Max 100MB.');
+    selectedFile = file;
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileSize').textContent = formatSize(file.size);
+    document.getElementById('fileSelected').classList.add('show');
+    hideError();
+    if (checkLimit()) document.getElementById('convertBtn').disabled = false;
+  }
+
+  function removeFile() {
+    selectedFile = null;
+    fileInput.value = '';
+    document.getElementById('fileSelected').classList.remove('show');
+    document.getElementById('convertBtn').disabled = true;
+    document.getElementById('convertBtn').textContent = 'Convert to PDF →';
+    hideError();
+  }
+
+  function formatSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+    return (b/1048576).toFixed(1) + ' MB';
+  }
+
+  function showError(msg) { const e = document.getElementById('errorMsg'); e.textContent = msg; e.classList.add('show'); }
+  function hideError() { document.getElementById('errorMsg').classList.remove('show'); }
+
+  function setStep(step) {
+    ['s1','s2','s3','s4'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      const lbl = document.getElementById('sl' + (i+1));
+      el.className = 'step-dot';
+      lbl.className = 'step-lbl';
+      if (i + 1 < step) { el.classList.add('done'); lbl.classList.add('done'); }
+      else if (i + 1 === step) { el.classList.add('active'); lbl.classList.add('active'); }
+    });
+    ['l1','l2','l3'].forEach((id, i) => {
+      document.getElementById(id).className = 'step-line' + (i + 1 < step ? ' done' : '');
+    });
+  }
+
+  function setProgress(pct, label) {
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressLabel').textContent = label;
+    if (startTime && pct > 5 && pct < 100) {
+      const elapsed = (Date.now() - startTime) / 1000;
+      const rate = pct / elapsed;
+      const rem = (100 - pct) / rate;
+      document.getElementById('progressEta').textContent = rem < 3 ? 'Almost done...' : `~${Math.ceil(rem)}s left`;
+    } else if (pct >= 100) {
+      document.getElementById('progressEta').textContent = '✓ Done!';
+    } else {
+      document.getElementById('progressEta').textContent = 'Estimating...';
+    }
+  }
+
+  async function convertFile() {
+    if (!selectedFile || !checkLimit()) return;
+    const btn = document.getElementById('convertBtn');
+    btn.disabled = true;
+    btn.textContent = 'Converting...';
+    hideError();
+    startTime = Date.now();
+    document.getElementById('progressWrap').classList.add('show');
+    setStep(1); setProgress(10, 'Reading file...');
+
+    try {
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(selectedFile);
+      });
+
+      setStep(2); setProgress(30, 'Uploading to server...');
+
+      const response = await fetch('/api/word-convert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileBase64: base64, fileName: selectedFile.name })
+      });
+
+      setStep(3); setProgress(70, 'Converting Word to PDF...');
+
+      const data = await response.json();
+      if (!response.ok || data.error) throw new Error(data.error || 'Conversion failed');
+
+      setStep(4); setProgress(100, 'Conversion complete!');
+      incrementUsage();
+
+      const byteArr = Uint8Array.from(atob(data.fileBase64), c => c.charCodeAt(0));
+      const blob = new Blob([byteArr], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const dlBtn = document.getElementById('downloadBtn');
+      dlBtn.href = url;
+      dlBtn.download = data.fileName;
+
+      setTimeout(() => {
+        document.getElementById('progressWrap').classList.remove('show');
+        document.getElementById('resultCard').classList.add('show');
+        btn.textContent = 'Convert to PDF →';
+        btn.disabled = false;
+        checkLimit();
+      }, 800);
+
+    } catch (err) {
+      document.getElementById('progressWrap').classList.remove('show');
+      showError('Something went wrong: ' + err.message);
+      btn.disabled = false;
+      btn.textContent = 'Convert to PDF →';
+    }
+  }
+
+  function resetTool() {
+    document.getElementById('resultCard').classList.remove('show');
+    removeFile();
+  }
+
+  window.addEventListener('load', () => checkLimit());
+</script>
+</body>
+</html>
