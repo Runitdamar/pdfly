@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — Pdfly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal: #171e19; --red: #ca0013; --gray-green: #b7c6c2;
+      --bg: #f4f7f6; --bg2: #edf1f0; --card: #ffffff;
+      --text: #171e19; --muted: #6b7f7a; --border: #b7c6c2;
+      --shadow: 0 20px 50px -12px rgba(0,0,0,0.08);
+      --radius-xl: 40px; --radius-lg: 24px; --radius-md: 16px;
+      --font: 'Nunito', sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(244,247,246,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; }
+    .logo { font-size: 1.6rem; font-weight: 900; color: var(--charcoal); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+    .logo-dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; }
+    .nav-back { font-size: 0.85rem; font-weight: 700; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--charcoal); }
+    .page-wrap { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+    .page-header { margin-bottom: 3rem; }
+    .page-header .tag { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--card); border: 1px solid var(--border); border-radius: 99px; padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 1rem; }
+    .page-header h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.6rem; }
+    .page-header p { color: var(--muted); font-size: 0.9rem; font-weight: 500; }
+    .content-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2.5rem; box-shadow: var(--shadow); margin-bottom: 1.2rem; }
+    .section-title { font-size: 1.1rem; font-weight: 900; color: var(--charcoal); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title .s-icon { width: 32px; height: 32px; background: var(--bg2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .content-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; font-weight: 500; margin-bottom: 0.8rem; }
+    .content-card p:last-child { margin-bottom: 0; }
+    .content-card ul { margin: 0.5rem 0 0.8rem 1.2rem; }
+    .content-card ul li { font-size: 0.9rem; color: var(--muted); line-height: 1.75; font-weight: 500; margin-bottom: 0.3rem; }
+    .highlight-box { background: var(--bg2); border-radius: var(--radius-md); padding: 1rem 1.2rem; margin: 1rem 0; border-left: 3px solid var(--red); }
+    .highlight-box p { color: var(--charcoal) !important; font-weight: 700 !important; font-size: 0.88rem !important; margin: 0 !important; }
+    footer { background: var(--charcoal); color: #fff; padding: 2.5rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.2rem; margin-top: 4rem; }
+    .footer-logo { font-size: 1.3rem; font-weight: 900; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { font-size: 0.82rem; font-weight: 600; color: var(--gray-green); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 0.78rem; color: #4a5e4d; font-weight: 500; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .content-card { animation: fadeUp 0.5s ease both; }
+    .content-card:nth-child(2) { animation-delay: 0.05s; }
+    .content-card:nth-child(3) { animation-delay: 0.10s; }
+    .content-card:nth-child(4) { animation-delay: 0.15s; }
+    .content-card:nth-child(5) { animation-delay: 0.20s; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Pdfly <span class="logo-dot"></span></a>
+  <a href="index.html" class="nav-back">← Home</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="tag">📋 Legal</div>
+    <h1>Terms of Service</h1>
+    <p>Last updated: June 2026 · Please read these terms carefully before using Pdfly.</p>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">✅</div> Acceptance of Terms</div>
+    <p>By accessing and using Pdfly, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
+    <div class="highlight-box"><p>Using Pdfly means you agree to these terms. These terms may be updated periodically — continued use of the service constitutes acceptance.</p></div>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">🛠️</div> Use of Service</div>
+    <p>Pdfly provides free online PDF tools including conversion, compression, merging, splitting, and related services. By using our service, you agree to:</p>
+    <ul>
+      <li>Use the service only for lawful purposes and in accordance with these terms.</li>
+      <li>Not upload files containing malware, viruses, or malicious code.</li>
+      <li>Not attempt to overload, disrupt, or damage our servers or infrastructure.</li>
+      <li>Not use automated scripts or bots to excessively use our free tools.</li>
+      <li>Take full responsibility for the files you upload and convert.</li>
+    </ul>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">📁</div> Your Files & Content</div>
+    <p>You retain full ownership of all files you process through Pdfly. By using our service:</p>
+    <ul>
+      <li>You confirm you have the right to process and convert the files you upload.</li>
+      <li>You agree not to upload copyrighted material without proper authorization.</li>
+      <li>You acknowledge that files sent to our conversion API are processed by third-party services (iLoveAPI) under their terms.</li>
+    </ul>
+    <p>We do not claim ownership of your files. Files processed in-browser never leave your device. Files sent to conversion APIs are deleted immediately after processing.</p>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">⚠️</div> Disclaimer of Warranties</div>
+    <p>Pdfly is provided "as is" without warranties of any kind. We do not guarantee:</p>
+    <ul>
+      <li>Uninterrupted or error-free operation of the service.</li>
+      <li>That conversion results will always meet your exact expectations.</li>
+      <li>Availability of the service at all times.</li>
+    </ul>
+    <p>We reserve the right to modify, suspend, or discontinue any part of the service at any time without prior notice.</p>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">🔒</div> Limitation of Liability</div>
+    <p>To the maximum extent permitted by law, Pdfly shall not be liable for any indirect, incidental, special, or consequential damages resulting from your use of the service, including but not limited to loss of data or files.</p>
+    <p>You use this service at your own risk. We strongly recommend keeping backup copies of important files before processing.</p>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title"><div class="s-icon">✉️</div> Contact</div>
+    <p>If you have any questions about these Terms of Service, please reach out through our <a href="contact.html" style="color:var(--red);font-weight:700;">Contact page</a>.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Pdfly <span class="logo-dot"></span></a>
+  <ul class="footer-links">
+    <li><a href="index.html">Tools</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pdfly. All rights reserved.</p>
+</footer>
+</body>
+</html>
